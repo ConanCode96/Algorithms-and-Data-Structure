@@ -40,6 +40,9 @@ public class main {
 		int i = root(p);
 		int j = root(q);
 
+
+		if(i == j) return; // connected to the same root!
+
 		// Keeping it logarithmic O(log N) at most.
 		// Linking the smaller tree to the bigger.
 
