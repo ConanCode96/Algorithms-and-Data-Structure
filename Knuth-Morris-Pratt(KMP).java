@@ -81,7 +81,7 @@ class SubStringSearch {
 			else {
 
 				while (i != 0 && pattern[i] != pattern[j])
-					i = transition[i];
+					i = transition[i-1];
 
 				if (pattern[i] == pattern[j])
 					continue; // continue and keep the loop-routine
