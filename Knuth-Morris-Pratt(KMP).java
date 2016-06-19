@@ -80,13 +80,10 @@ class SubStringSearch {
 
 			else {
 
-				while (i != 0 && pattern[i] != pattern[j])
+				if (i != 0)
 					i = transition[i-1];
 
-				if (pattern[i] == pattern[j])
-					continue; // continue and keep the loop-routine
-
-				else if (i == 0) { // no possible (pre==suf)-fix
+				else { // no possible (pre==suf)-fix
 					transition[j] = 0;
 					j++;
 				}
