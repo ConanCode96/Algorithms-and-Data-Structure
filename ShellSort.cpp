@@ -1,4 +1,7 @@
-  #include <bits/stdc++h>
+
+  #include <bits/stdc++.h>
+
+  using namespace std;
   
   int a[] = {4, 4, 5, 2, 2, 7, 9, 0, 1, 5, 0, 0, 5, 9, 3, 2, 30, 6};
   const int N = sizeof(a) / sizeof(a[0]);
@@ -48,4 +51,4 @@
 
     return 0;
 
-    }
+}
