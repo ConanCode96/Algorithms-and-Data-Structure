@@ -42,7 +42,7 @@
      //SHELL SORT
      ShellSort(a);
 
-   	for(auto x : a)  cout << x <<" ";
+    for(auto x : a)  cout << x <<" ";
 
     puts("");
 
