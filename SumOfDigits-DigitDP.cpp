@@ -14,7 +14,7 @@ const int mod = ((int)1e9 + 7);
 
 int len;
 string s;
-ll dp[18][180][2];
+ll dp[18][200][2];
 
 int op = 0;
 
@@ -61,8 +61,25 @@ int main(){
     memset(dp, 0xff, sizeof dp);
 
     cout << calc(0, 0, true) << endl;
-    
-    cout << op << endl;
+
+    // cout << op << endl;
+
+	memset(dp, 0x00, sizeof dp);
+
+	for(int i = 0; i < 180; ++i) dp[len][i][0] = dp[len][i][1] = i;
+
+    for(int idx = len - 1; idx >= 0; --idx){
+    	for(int sum = 0; sum < 180; ++sum){
+    		for(int tight = 0; tight < 2; ++tight){
+    			int mx = tight ? s[idx] - '0' : 9;
+    			for(int i = 0; i <= mx; ++i){
+    				dp[idx][sum][tight] += dp[idx + 1][sum + i][tight && i == (s[idx] - '0')];
+    			}
+    		}
+    	}
+    }
+
+    cout << dp[0][0][1] << endl;
 
  	return 0;
 }
