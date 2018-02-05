@@ -270,3 +270,39 @@ void unite(int x, int y, std::vector<int>& ds){
   }
 }
 //////////////////////////////////////////
+
+
+//TARJAN for SCCs on Digraphs
+
+std::vector<vector<int>> g;
+int pre[MX];
+int low[MX];
+int id[MX];
+stack<int> stk;
+int cntr, scc;
+
+void tarjan(int x){
+
+  stk.push(x);
+  pre[x] = cntr++;
+  low[x] = pre[x];
+
+  for(auto y : g[x]){
+    if(pre[y] == -1)
+      tarjan(y);
+    low[x] = min(low[x], low[y]); 
+  }
+
+  if(pre[x] == low[x]){ //component root
+    while(true){
+      int y = stk.top();
+      stk.pop();
+      low[y] = MX; //inf
+      id[y] = scc;
+      if(y == x) break;
+    }
+    scc++;
+  }
+}
+
+///////////////////////////////////////////////
