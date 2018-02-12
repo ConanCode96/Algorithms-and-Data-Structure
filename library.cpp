@@ -39,7 +39,6 @@ struct segmentTree{
   std::vector<int> tree, lazy;
 
   segmentTree(){
-    n = (int)a.size();
     lgn = 31 - __builtin_clz(n) + 2;
     tree.assign(1 << lgn, 0);
     lazy.assign(1 << lgn, 0);
