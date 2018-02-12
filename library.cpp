@@ -57,7 +57,7 @@ struct segmentTree{
       }
   }
   
-  void propagate_lazy(int pos){
+  inline void propagate_lazy(int pos, int l, int r){
 
       if(lazy[pos] != 0){ //get_prev_lazy_updates
       
@@ -74,7 +74,7 @@ struct segmentTree{
 
   void add(int lx, int rx, int val, int l = 1, int r = n, int pos = 0){
       
-      propagate_lazy(pos);
+      propagate_lazy(pos, l, r);
 
       if(l > r || l > rx || r < lx) return;
     
@@ -99,7 +99,7 @@ struct segmentTree{
   
   int query(int lx, int rx, int l = 1, int r = n, int pos = 0){
           
-      propagate_lazy(pos);
+      propagate_lazy(pos, l, r);
      
       if(l > r || l > rx || r < lx) return -1; //outside
  
