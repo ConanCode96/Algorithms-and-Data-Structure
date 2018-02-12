@@ -30,24 +30,25 @@ int qry(int idx){
 ///////////////////////////////////////
 // Segment Tree
 
-int n;
+int n, m;
+std::vector<int> a;
 
 struct segmentTree{
 
   int lgn;
-  std::vector<ll> tree, lazy;
+  std::vector<int> tree, lazy;
 
-  segmentTree(const vector<ll> & a){
-  	n = (int)a.size();
-  	lgn = 31 - __builtin_clz(n) + 2;
-  	tree.assign(1 << lgn, 0);
-  	lazy.assign(1 << lgn, 0);
+  segmentTree(){
+    n = (int)a.size();
+    lgn = 31 - __builtin_clz(n) + 2;
+    tree.assign(1 << lgn, 0);
+    lazy.assign(1 << lgn, 0);
   }
 
-  void build(int l = 1, int r = n, int pos = 0){
+  void build(int l = 0, int r = n - 1, int pos = 0){
       
       if(l == r){
-          tree[pos] = 0;
+          tree[pos] = a[l];
           return;
       }
       else{
@@ -72,7 +73,7 @@ struct segmentTree{
       }  
   }
 
-  void add(int lx, int rx, int val, int l = 1, int r = n, int pos = 0){
+  void update(int lx, int rx, int val, int l = 0, int r = n - 1, int pos = 0){
       
       propagate_lazy(pos, l, r);
 
@@ -91,13 +92,13 @@ struct segmentTree{
       }
 
       int mid = (l + r) / 2;
-      add(lx, rx, val, l, mid, 2 * pos + 1);
-      add(lx, rx, val, mid + 1, r, 2 * pos + 2);
+      update(lx, rx, val, l, mid, 2 * pos + 1);
+      update(lx, rx, val, mid + 1, r, 2 * pos + 2);
     
       tree[pos] = max(tree[2 * pos + 1], tree[2 * pos + 2]);
   }
   
-  int query(int lx, int rx, int l = 1, int r = n, int pos = 0){
+  int query(int lx, int rx, int l = 0, int r = n - 1, int pos = 0){
           
       propagate_lazy(pos, l, r);
      
