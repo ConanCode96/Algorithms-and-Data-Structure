@@ -55,6 +55,24 @@ void insert(int x, node* cur){
 
 }
 
+void remove(int x, node* cur){
+	
+	for(int i = 30; i >= 0; --i){
+		int val = (1 << i) & x;
+		if(val == 0){
+			if(cur->lf == 0)
+				cur->lf = new node();
+			cur = cur->lf;
+			cur->cnt--;
+		}else{
+			if(cur->rg == 0)
+				cur->rg = new node();
+			cur = cur->rg;
+			cur->cnt--;
+		}
+	}
+}
+
 int query(int x, node* cur){
 
 	for(int i = 30; i >= 0; --i){
@@ -78,23 +96,19 @@ int main(){
 
 	prep();
 	
-	int n;
-	cin >> n;
-
 	node* root = new node();
-
-	for(int i = 0; i < n; ++i){
-		int x;
-		cin >> x;
-		insert(x, root);
-	}
 
 	int q;
 	cin >> q;
 	for(int i = 0; i < q; ++i){
-		int x;
-		cin >> x;
-		cout << query(x, root) << endl;
+		char t; int x;
+		cin >> t >> x;
+		if(t == '+')
+			insert(x, root);
+		else if(t == '-')
+			remove(x, root);
+		else
+			cout << query(x, root) << '\n';
 	}
 	
     return 0;
