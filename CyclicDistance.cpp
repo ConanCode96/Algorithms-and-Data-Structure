@@ -1,4 +1,5 @@
 // getting the sum of distances over a cycle from both directions
+//Arrays fw, bw are 0-indexed also indices are 0-indexed
 
 inline int getRight(int at, int r){
     int res = fw[(r - 1 + n) % n];
@@ -17,3 +18,19 @@ inline int getLeft(int at, int l){
 }
 
 /////////////////////////////////////////////////////////////////////////////
+
+//Another optimal way
+// 1-indexed array, 0-indexed positions
+//only calculate cw direction and its reverse
+
+ll dist(int a, int b) {
+    bool swapped = false;
+	if (a > b){
+		swap(a, b);
+        swapped = true;
+    }
+	ll d = x[b] - x[a];
+// 	return min(d, x[n] - d);
+    return swapped? x[n] - d : d;
+}
+///////////////////////////////////////////////////////////////////
