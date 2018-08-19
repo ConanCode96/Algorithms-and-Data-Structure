@@ -1,2 +1,2 @@
 # Algorithms-and-Data-Structure
-Every bit of algorithms and data structure I learn is shared here :) 
+This repo is for sharing my hand-written accumulated experience of implementing different algorithms/data structures(there will be a huge gap implementation-wise with time)
