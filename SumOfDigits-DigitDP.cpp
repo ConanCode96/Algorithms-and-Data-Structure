@@ -18,6 +18,8 @@ ll dp[18][200][2];
 
 int op = 0;
 
+// THIS SUMS THE DIGITS OF NUMBERS LESS THAN SOME NUMBER
+
 ll calc(int idx, int sum, bool tight){
 
 	if(idx == len){
