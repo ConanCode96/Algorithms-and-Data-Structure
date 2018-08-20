@@ -306,3 +306,32 @@ void tarjan(int x){
 }
 
 ///////////////////////////////////////////////
+
+//RETURNS MX DIAMETER, HEIGHT OF A TREE
+
+pair<int, int> dia(int x, int par = -1)
+{
+
+    int mxHeight[3] = {-1, -1, -1};
+
+    pair<int, int> mine = {0, 0};
+
+    for (auto &y : g[x])
+    {
+        if (y == par)
+            continue;
+        auto res = dia(y, par);
+        mine.X = max(mine.X, res.X);
+        mxHeight[0] = mine.Y + 1;
+        sort(mxHeight, mxHeight + 3);
+    }
+
+    for (auto &v : mxHeight)
+        if (v == -1)
+            v = 0;
+
+    mine.X = max(mine.X, mxHeight[1] + mxHeight[2]);
+    return {mine.X, mxHeight[2]}; // MX (diameter, height)
+}
+
+////////////////////////////////////////////////////////////////////
