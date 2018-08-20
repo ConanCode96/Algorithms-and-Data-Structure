@@ -61,7 +61,6 @@ void dfs(int node, int par = -1){
 	}
 }
 
-
 //MUST BE STARTED FROM A LEAF ON THE TREE DIAMETER (EXTREMELY IMPORTANT!)
 
 void lsd(int node, int par = -1){
