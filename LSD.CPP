@@ -100,7 +100,6 @@ int main()
 {
     prep();
 
-
     //TIMUS TREE2
     
     int n, q;
