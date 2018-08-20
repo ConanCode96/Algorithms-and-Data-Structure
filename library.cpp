@@ -320,7 +320,7 @@ pair<int, int> dia(int x, int par = -1)
     {
         if (y == par)
             continue;
-        auto res = dia(y, par);
+        auto res = dia(y, x);
         mine.X = max(mine.X, res.X);
         mxHeight[0] = mine.Y + 1;
         sort(mxHeight, mxHeight + 3);
