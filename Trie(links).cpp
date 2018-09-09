@@ -61,12 +61,12 @@ void remove(int x, node* cur){
 		int val = (1 << i) & x;
 		if(val == 0){
 			if(cur->lf == 0)
-				cur->lf = new node();
+				return;
 			cur = cur->lf;
 			cur->cnt--;
 		}else{
 			if(cur->rg == 0)
-				cur->rg = new node();
+				return;
 			cur = cur->rg;
 			cur->cnt--;
 		}
