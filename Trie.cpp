@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int MAX_NODES = 1000;
+const int MAX_NODES = 1000; // n * len(mx);
 
 struct Trie{
   
@@ -29,6 +29,7 @@ struct Trie{
 		int node = 0;
 		int res = 0;
 		for(int i = 0; i < s.size(); ++i){
+			if(node == -1) return 0;
 			res = cnt[node][s[i] - 'a'];
 			node = t[node][s[i] - 'a'];
 		}
