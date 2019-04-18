@@ -91,5 +91,13 @@ int main(){
 	}
 
 	//////////////////////////////////////////////////
+	
+	int cnt3[MX]; //number of primes in a number (summations over their powers)
+	
+	for(int i = 2; i < MX; ++i)
+        	cnt3[i] = 1 + cnt3[i / mp[i]];
+	
+	//////////////////////////////////////////////////
+	
     return 0;
 }	
