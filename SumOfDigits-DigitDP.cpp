@@ -70,6 +70,7 @@ int main(){
 
 	for(int i = 0; i < 180; ++i) dp[len][i][0] = dp[len][i][1] = i;
 
+	// this implementation is working right to left from least significant to most significant(same as top down)
     for(int idx = len - 1; idx >= 0; --idx){
     	for(int sum = 0; sum < 180; ++sum){
     		for(int tight = 0; tight < 2; ++tight){
