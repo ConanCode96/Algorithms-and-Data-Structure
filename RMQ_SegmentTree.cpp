@@ -4,13 +4,14 @@ using namespace std;
 
 typedef vector<int> vi;
 
-
 class SegmentTree{
-
-private: vi A, st; int n;
 
 inline int left (int p) { return p << 1; }
 inline int right(int p) { return (p << 1) + 1; }
+
+public:
+
+vector<int> A, st; int n;
 
 void build(int p, int L, int R){
 
@@ -29,15 +30,43 @@ void build(int p, int L, int R){
 	int p1 = st[l];
 	int p2 = st[r];
 
-	st[p] = (A[p1] <= A[p2])? p1 : p2;
+	st[p] = (A[p1] >= A[p2])? p2 : p1;
 
 	}
 	
 }
 
-int rmq(int p, int L, int R, int i, int j){
+void update(int p, int L, int R, int index){
 
-	if(L > j || R < i) return -1;
+    if(index < L || index > R) return;
+
+	if(L == R && L == index) st[p] = index; //index
+
+	else{
+
+        int mid = (L+R)>> 1;
+
+        int l = left(p);
+        int r = right(p);
+
+        update(l, L, mid, index);
+        update(r, mid + 1, R, index);
+
+        int p1 = st[l];
+        int p2 = st[r];
+
+        // if(p1 == -1) st[p] = p2;
+        // else if(p2 == -1) st[p] = p1;
+        // else
+        st[p] = (A[p1] <= A[p2]) ? p1 : p2;
+    }
+	
+}
+
+//returns minimum number index (right-preferred)
+int rmq(int p, int L, int R, int i, int j){
+ 
+	if(L > j || R < i) return -1; // non-existent
 	if(L >= i && R <= j) return st[p];
 
 	int mid = (L+R)>> 1;
@@ -48,23 +77,20 @@ int rmq(int p, int L, int R, int i, int j){
 	int p1 = rmq(l, L, mid, i, j);
 	int p2 = rmq(r, mid + 1, R, i, j);
 
-	if(p1 == -1) return p2;
+    if(p1 == -1) return p2;
 	if(p2 == -1) return p1;
 
-	return (A[p1] <= A[p2]) ? p1 : p2;
+	return (A[p2] <= A[p1]) ? p2 : p1;
 }
 
-
-public :
-
-SegmentTree(const vi &A){
-	this->A = A;
-	n = (int) A.size();
-	st.assign(4*n,0);
-	build(1, 0, n - 1);
+SegmentTree(const vector<int> &A){
+    this->A = A;
+    this->n = A.size();
+	st.assign(4*n, -1);
+    build(1, 0, n - 1);
 }
 
-int rmq(int i, int j){ return rmq(1, 0, n - 1, i, j); }
+int rmq(int i, int j){ return i <= j ? rmq(1, 0, n - 1, i, j) : -1; }
 
 };
 
