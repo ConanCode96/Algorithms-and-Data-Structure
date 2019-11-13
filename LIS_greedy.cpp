@@ -14,7 +14,7 @@ void add_self(int &x, int y){x += y; if(x >= mod) x -= mod;}
 void sub_self(int &x, int y){x -= y; if(x < 0) x += mod;}
 void mul(int &x, int y){x = x * 1LL * y % mod;}
 
-int greadyLIS(const vector<int>& v){    //Memory -> O(n), Time -> O(nLogn)
+int greedyLIS(const vector<int>& v){    //Memory -> O(n), Time -> O(nLogn)
     int n = v.size();
     vector<int> ret;
     for(int i=0; i<n; i++){
