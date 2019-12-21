@@ -1,3 +1,49 @@
+vector<pair<int, int>> convert(const vector<int> &a){
+	vector<pair<int, int>> res;
+	int it = 0;
+	int n = a.size();
+	while(it < n){
+		int j = it;
+		while(j < n && a[it] == a[j]) j++;
+		int cnt = j - it;
+		res.push_back({a[it], cnt});
+		it = j;
+	}
+	return res;
+}
+
+long long modpower(long long a, long long b)
+{
+  if (b == 0)
+    return 1ll;
+  long long x = modpower(a, b / 2ll);
+  x = (x * x) % mod;
+  if (b & 1)
+    return (x * a) % mod;
+  return (x % mod);
+}
+
+struct combination
+{
+  vector<long long> fact, inv;
+  combination(int sz) : fact(sz + 1), inv(sz + 1)
+  {
+    fact[0] = 1ll;
+    inv[0] = 1ll;
+    for (long long i = 1; i <= sz; ++i)
+    {
+      fact[i] = (fact[i - 1] * i) % mod;
+      inv[i] = modpower(fact[i], mod - 2ll);
+    }
+  }
+  long long choose(int n, int k) const
+  {
+    if (k < 0 || n < k)
+      return 0;
+    return ((((fact[n] * inv[k]) % mod) * inv[n - k]) % mod);
+  }
+};
+
 class fenwick{
 
 public:
@@ -7,7 +53,7 @@ map<int, int>mp;
 int tree[N];
 
 void upd(int idx){
-    idx++;
+    // idx++;
     
     for(; idx <= n; idx += idx & -idx)
         tree[idx]++;
@@ -16,7 +62,7 @@ void upd(int idx){
 }
 int qry(int idx){
     
-    idx++;
+    // idx++;
     int ret = 0;
     for( ;idx > 0; idx -= idx & -idx)
         ret += tree[idx];
