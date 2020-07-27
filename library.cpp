@@ -247,9 +247,10 @@ struct SQRT{
     int n = int(s.size());
     std::vector<int> lcp(n);
 
-    for(int i = 1, j = 0; i < n; ++i, ++j){
+    for(int i = 1, j = 0; i < n; ++i){
       while(j && s[j] != s[i]) j = lcp[j - 1];
       lcp[i] = j + (s[i] == s[j]);
+      if(s[i] == s[j]) j++;
     }
 ///////////////////////////////////////////////////////    
 
